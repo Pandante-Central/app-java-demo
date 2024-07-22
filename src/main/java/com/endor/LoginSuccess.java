@@ -55,6 +55,8 @@ public class LoginSuccess extends HttpServlet {
 
 		out.println("<font color=red> Hi " + username + " your session id is: " + request.getSession().getId() + "</font>");
 
+		out.println("<font color=green>Oh, one more thing, " + username + ", your shoe is untied.");
+		
 		out.println("<br/><br/>");
 		out.print("<br><a href='logout'><button type=\"button\">Logout</button></a>");
 
