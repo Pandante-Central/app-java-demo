@@ -32,7 +32,17 @@ public class OSCommandServlet extends HttpServlet {
         out.println(form);
 
         String command = request.getParameter("command");
-        String find = "find " + command;
-        Runtime.getRuntime().exec(find);
+        if (command == null || !command.matches("^[a-zA-Z0-9_\\-\\.]+$")) {
+            out.println("<p>Invalid command. Only alphanumeric characters, underscores, hyphens, and dots are allowed.</p>");
+        } else {
+            ProcessBuilder processBuilder = new ProcessBuilder("find", command);
+            try {
+                Process process = processBuilder.start();
+                process.waitFor();
+                out.println("<p>Command executed successfully.</p>");
+            } catch (Exception e) {
+                out.println("<p>Error executing command: " + e.getMessage() + "</p>");
+            }
+        }
     }
 }
