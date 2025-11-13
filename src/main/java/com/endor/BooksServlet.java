@@ -1761,9 +1761,11 @@ public class BooksServlet extends HttpServlet {
             return false;
         PreparedStatement stmt = null;
         try {
-            String query = "SELECT FIRST, LAST from CUSTOMERS WHERE LAST = \'" + name + "\' AND PASSWORD = \'" + pass + "\'";
+            String query = "SELECT FIRST, LAST from CUSTOMERS WHERE LAST = ? AND PASSWORD = ?";
             System.out.println("QUERY :" + query);
             stmt = conn.prepareStatement(query);
+            stmt.setString(1, name);
+            stmt.setString(2, pass);
         } catch (SQLException e) {
             e.printStackTrace();
         }
